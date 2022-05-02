@@ -1,45 +1,40 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { RootState } from "../_redux/reducers";
+import { toggleActionRequest } from "../_redux/actions/usersActions";
 import axios from "axios";
-
-type User = {
-    id: number,
-    name: string,
-    username: string
-}
+import { IUser } from "../models/IUser";
 
 const UsersTable: FunctionComponent = () => {
-    const [users, setUsers] = useState<User[]>([]);
+    
+  const dispatch = useDispatch();
+  const { pending, users, error } = useSelector(
+    (state: RootState) => state.users
+  );
+  useEffect(() => {
+    dispatch(toggleActionRequest());
+  }, []);
 
-    useEffect(() => {
-        const url = "https://jsonplaceholder.typicode.com/users";
-        axios.get(url)
-            .then(response => setUsers(response.data));
-    }, []);
-
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        name
-                    </th>
-                    <th>
-                        username
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {users.map(user => <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.username}</td>
-                </tr>)}
-            </tbody>
-        </table>
-    )
-}
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user: IUser) => (
+          <tr key={user.id}>
+            <td>{user.id}</td>
+            <td>{user.name}</td>
+            <td>{user.username}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 export default UsersTable;
