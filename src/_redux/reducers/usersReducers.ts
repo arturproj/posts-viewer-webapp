@@ -19,18 +19,18 @@ const initialState: UsersState = {
 
 export default (state = initialState, action: UsersActions) => {
   switch (action.type) {
-    case Actions.FETCH_POST_REQUEST:
+    case Actions.FETCH_USER_REQUEST:
       return {
         ...state,
         pending: true,
       };
-    case Actions.FETCH_POST_SUCCESS:
+    case Actions.FETCH_USER_SUCCESS:
       return {
         ...state,
         users: action.payload.users,
         pending: false,
       };
-    case Actions.FETCH_POST_FAILURE:
+    case Actions.FETCH_USER_FAILURE:
       return {
         ...state,
         users: [],
