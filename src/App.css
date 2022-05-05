@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.pending-contener {
+  height: 75vh;
+}
+
+.pending-loader{
+  height: auto
+}

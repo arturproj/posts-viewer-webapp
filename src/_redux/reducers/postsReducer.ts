@@ -27,13 +27,13 @@ export default (state = initialState, action: PostsActions) => {
     case Actions.FETCH_POST_SUCCESS:
       return {
         ...state,
-        users: action.payload.posts,
+        posts: action.payload.posts,
         pending: false,
       };
     case Actions.FETCH_POST_FAILURE:
       return {
         ...state,
-        users: [],
+        posts: [],
         pending: false,
         error: action.payload.error,
       };

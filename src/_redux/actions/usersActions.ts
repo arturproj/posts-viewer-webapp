@@ -1,6 +1,6 @@
 import fetchActions from "./typesActions";
 
-export const toggleActionRequest = () => ({
+export const toggleUsersRequest = () => ({
   type: fetchActions.FETCH_USER_REQUEST,
 });
 

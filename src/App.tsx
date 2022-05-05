@@ -5,6 +5,7 @@ import "./App.css";
 
 import Main from "./layouts/Main";
 import UsersTable from "./components/UsersTable";
+import PostsTable from "./components/PostsTable";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<UsersTable />} />
-          <Route path="/posts/:id" element={<UsersTable />} />
+          <Route path="/posts/:id" element={<PostsTable />} />
         </Route>
       </Routes>
     </BrowserRouter>
