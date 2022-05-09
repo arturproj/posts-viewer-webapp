@@ -8,12 +8,22 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Row, Col, Container, Button, Spinner } from "react-bootstrap";
 
+function filterRegexAddress(logement: string, regex: any) {
+  return logement.match(regex);
+}
+
 const Main: FunctionComponent = () => {
-  const { pending, usersCount, postsCount } = useSelector(
+  const { pending, usersCount, postsCount, suite, appar } = useSelector(
     (state: RootState) => ({
       pending: state.users.pending && state.posts.pending,
       usersCount: state.users.users.length,
       postsCount: state.posts.posts.length,
+      suite: state.users.users.filter((user: any) =>
+        filterRegexAddress(user.address.suite, "Suite")
+      ).length,
+      appar: state.users.users.filter((user: any) =>
+        filterRegexAddress(user.address.suite, "Apt")
+      ).length,
     })
   );
 
@@ -31,12 +41,14 @@ const Main: FunctionComponent = () => {
         <>
           {" "}
           <Row className="mx-auto">
-            {usersCount !== 0 ? (
-              <Col xs={6}>Users found : {usersCount}</Col>
-            ) : null}
-            {postsCount !== 0 ? (
-              <Col xs={6}>Posts found : {postsCount}</Col>
-            ) : null}
+            <h5>Nombre de données disponibles </h5>
+            <Col xs={6}>Users found : {usersCount}</Col>
+            <Col xs={6}>Posts found : {postsCount}</Col>
+          </Row>
+          <Row className="mx-auto">
+            <h5>Filtrer par type de logement</h5>
+            <Col xs={6}>Suite found : {suite}</Col>
+            <Col xs={6}>Appar found : {appar}</Col>
           </Row>
           <Outlet />
         </>
